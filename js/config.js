@@ -1,8 +1,7 @@
 ﻿// Конфигурация Supabase
-// ЗАМЕНИТЕ на свои значения из панели Supabase: Project Settings → API
 const SUPABASE_CONFIG = {
-    url: 'https://your-project.supabase.co',
-    anonKey: 'your-anon-key-here'
+    url: 'https://jqpuwagaogczjrffzrrm.supabase.co',
+    anonKey: 'sb_publishable_agM52VWOsqUR_GpSEzyVxA_cl6isEst'
 };
 
 window.SUPABASE_CONFIG = SUPABASE_CONFIG;
