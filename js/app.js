@@ -12,28 +12,43 @@ const bgStyle = document.getElementById('bgStyle');
 const step2Preview = document.getElementById('step2Preview');
 const heroBgImg = document.getElementById('heroBgImg');
 
-// Обновление превью фона при выборе
+// Обновление превью фона при выборе в select
 if (bgStyle) {
     bgStyle.addEventListener('change', (e) => {
         const style = e.target.value;
+        if (style === 'custom') return; // Не меняем для кастомных
+        
         if (step2Preview) {
             step2Preview.src = `images/bouquets/${style}.webp`;
         }
         if (heroBgImg) {
             heroBgImg.src = `images/bouquets/${style}.webp`;
         }
+        
+        // Сбрасываем кастомные изображения
+        window.customBgImage = null;
+        window.generatedAiImage = null;
+        
+        // Снимаем выделение с галереи
+        document.querySelectorAll('.ai-result').forEach(el => el.classList.remove('selected'));
     });
 }
 
-// Выбор фона из карточек
+// Выбор фона из верхних карточек
 document.querySelectorAll('.bg-card').forEach(card => {
     card.addEventListener('click', () => {
         document.querySelectorAll('.bg-card').forEach(c => c.classList.remove('active'));
         card.classList.add('active');
         const bg = card.dataset.bg;
+        
         if (bgStyle) bgStyle.value = bg;
         if (step2Preview) step2Preview.src = `images/bouquets/${bg}.webp`;
         if (heroBgImg) heroBgImg.src = `images/bouquets/${bg}.webp`;
+        
+        // Сбрасываем кастомные
+        window.customBgImage = null;
+        window.generatedAiImage = null;
+        document.querySelectorAll('.ai-result').forEach(el => el.classList.remove('selected'));
     });
 });
 
@@ -84,10 +99,9 @@ async function handleFormSubmit(e) {
     let selectedStyle = bgStyle ? bgStyle.value : 'romantic1';
     let customImageUrl = null;
     
-    // Если выбран кастомный фон (AI или загруженный)
+    // Если есть кастомное изображение (AI или загруженное)
     if (window.customBgImage || window.generatedAiImage) {
         customImageUrl = window.customBgImage || window.generatedAiImage;
-        // Сохраняем последний использованный стиль как базовый
         selectedStyle = 'custom';
     }
 
@@ -175,7 +189,6 @@ if (aiGenerateBtn) {
                 
                 // Устанавливаем значение в select
                 if (bgStyle) {
-                    // Проверяем есть ли опция custom, если нет — добавляем
                     let customOption = bgStyle.querySelector('option[value="custom"]');
                     if (!customOption) {
                         customOption = document.createElement('option');
@@ -186,8 +199,8 @@ if (aiGenerateBtn) {
                     bgStyle.value = 'custom';
                 }
                 
-                window.customBgImage = imageUrl;
                 window.generatedAiImage = imageUrl;
+                window.customBgImage = null; // Сбрасываем загруженное
                 
                 // Снимаем выделение с галереи
                 document.querySelectorAll('.ai-result').forEach(el => el.classList.remove('selected'));
@@ -249,6 +262,7 @@ if (useUploadedBtn) {
             }
             
             window.customBgImage = window.uploadedBgImage;
+            window.generatedAiImage = null; // Сбрасываем AI
             
             // Снимаем выделение с галереи
             document.querySelectorAll('.ai-result').forEach(el => el.classList.remove('selected'));
@@ -258,7 +272,7 @@ if (useUploadedBtn) {
     });
 }
 
-// Выбор из галереи
+// Выбор из галереи (нижние 6 картинок)
 document.querySelectorAll('.ai-result').forEach(item => {
     item.addEventListener('click', () => {
         // Снимаем выделение со всех
@@ -267,10 +281,15 @@ document.querySelectorAll('.ai-result').forEach(item => {
         item.classList.add('selected');
         
         const bg = item.dataset.bg;
+        
+        // Применяем фон
         if (step2Preview) step2Preview.src = `images/bouquets/${bg}.webp`;
         if (heroBgImg) heroBgImg.src = `images/bouquets/${bg}.webp`;
+        
+        // Устанавливаем значение в select
         if (bgStyle) bgStyle.value = bg;
         
+        // Сбрасываем кастомные
         window.customBgImage = null;
         window.generatedAiImage = null;
     });
