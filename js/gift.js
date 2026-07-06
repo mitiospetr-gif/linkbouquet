@@ -37,7 +37,7 @@ async function loadGift() {
             // Кастомное изображение (AI или загруженное)
             giftBgImage.src = data.custom_image_url;
         } else if (data.bouquet_style && data.bouquet_style !== 'custom') {
-            // Готовый стиль
+            // Готовый стиль из галереи
             giftBgImage.src = `images/bouquets/${data.bouquet_style}.webp`;
         } else {
             // По умолчанию
@@ -47,7 +47,7 @@ async function loadGift() {
         // Текст поздравления
         greetingText.textContent = data.greeting_text || 'Для тебя!';
         
-        // Ссылки
+        // Ссылки — проверяем и показываем только существующие
         let hasLinks = false;
         
         if (data.youtube_link) {
