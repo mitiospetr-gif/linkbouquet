@@ -1,8 +1,5 @@
 ﻿// ===== ГЛАВНАЯ: СОЗДАНИЕ БУКЕТА =====
 
-// Используем глобальный supabaseClient из supabase.js
-// НЕ объявляем заново!
-
 const form = document.getElementById('bouquetForm');
 const resultPreview = document.getElementById('resultPreview');
 const placeholderPreview = document.getElementById('placeholderPreview');
@@ -15,20 +12,14 @@ const bgStyle = document.getElementById('bgStyle');
 const step2Preview = document.getElementById('step2Preview');
 const heroBgImg = document.getElementById('heroBgImg');
 
-// Обновление превью фона при выборе
 if (bgStyle) {
     bgStyle.addEventListener('change', (e) => {
         const style = e.target.value;
-        if (step2Preview) {
-            step2Preview.src = `images/bouquets/${style}.webp`;
-        }
-        if (heroBgImg) {
-            heroBgImg.src = `images/bouquets/${style}.webp`;
-        }
+        if (step2Preview) step2Preview.src = `images/bouquets/${style}.webp`;
+        if (heroBgImg) heroBgImg.src = `images/bouquets/${style}.webp`;
     });
 }
 
-// Выбор фона из карточек
 document.querySelectorAll('.bg-card').forEach(card => {
     card.addEventListener('click', () => {
         document.querySelectorAll('.bg-card').forEach(c => c.classList.remove('active'));
@@ -40,38 +31,25 @@ document.querySelectorAll('.bg-card').forEach(card => {
     });
 });
 
-if (form) {
-    form.addEventListener('submit', handleFormSubmit);
-}
-
-if (copyBtn) {
-    copyBtn.addEventListener('click', () => copyToClipboard(giftLink.textContent));
-}
-
-if (copyLinkBtn) {
-    copyLinkBtn.addEventListener('click', () => copyToClipboard(giftLink.textContent));
-}
-
-if (openBtn) {
-    openBtn.addEventListener('click', () => window.open(giftLink.textContent, '_blank'));
-}
+if (form) form.addEventListener('submit', handleFormSubmit);
+if (copyBtn) copyBtn.addEventListener('click', () => copyToClipboard(giftLink.textContent));
+if (copyLinkBtn) copyLinkBtn.addEventListener('click', () => copyToClipboard(giftLink.textContent));
+if (openBtn) openBtn.addEventListener('click', () => window.open(giftLink.textContent, '_blank'));
 
 async function handleFormSubmit(e) {
     e.preventDefault();
     
-    // Проверяем авторизацию
     const { data: { user } } = await supabaseClient.auth.getUser();
     if (!user) {
         showToast('Пожалуйста, войдите в систему', 'error');
-        setTimeout(() => {
-            window.location.href = '/login.html';
-        }, 1500);
+        setTimeout(() => window.location.href = '/login.html', 1500);
         return;
     }
     
     const submitBtn = form.querySelector('.btn-create');
     setLoading(submitBtn, true);
 
+    const greetingText = document.getElementById('greetingText').value.trim();
     const youtubeLink = document.getElementById('youtubeLink').value.trim();
     const yandexLink = document.getElementById('yandexLink').value.trim();
     const mp3Link = document.getElementById('mp3Link').value.trim();
@@ -83,7 +61,10 @@ async function handleFormSubmit(e) {
     }
 
     const bouquetData = {
-        greeting_text: document.getElementById('greetingText').value.trim(),
+        title: greetingText || 'Букет без названия',
+        url: youtubeLink || yandexLink || mp3Link || 'https://example.com',
+        description: greetingText,
+        greeting_text: greetingText,
         youtube_link: youtubeLink || null,
         yandex_link: yandexLink || null,
         mp3_link: mp3Link || null,
@@ -102,15 +83,11 @@ async function handleFormSubmit(e) {
         if (error) throw error;
 
         const url = `${window.location.origin}/gift.html?id=${data.short_id}`;
-        
         giftLink.textContent = url;
         placeholderPreview.style.display = 'none';
         resultPreview.style.display = 'flex';
         
-        if (qrContainer) {
-            generateQRCode(url, 'qrContainer');
-        }
-
+        if (qrContainer) generateQRCode(url, 'qrContainer');
         showToast('Букет создан! 🌸');
 
     } catch (err) {
@@ -130,7 +107,6 @@ function generateShortId() {
     return result;
 }
 
-// AI генерация (заглушка)
 const aiGenerateBtn = document.getElementById('aiGenerateBtn');
 if (aiGenerateBtn) {
     aiGenerateBtn.addEventListener('click', () => {
