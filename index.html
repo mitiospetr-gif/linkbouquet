@@ -115,32 +115,68 @@
         </div>
     </section>
 
-    <!-- AI Generation -->
-    <section class="ai-section">
-        <h2 class="section-title">Генерация фона с AI</h2>
-        <p class="ai-subtitle">Опиши настроение или идею, а AI создаст уникальный фон</p>
+    <!-- AI Generation & Upload -->
+    <section class="ai-section" id="create">
+        <h2 class="section-title">Создайте уникальный фон</h2>
+        <p class="ai-subtitle">Сгенерируйте с AI, загрузите своё или выберите из галереи</p>
+        
+        <!-- AI Generation -->
         <div class="ai-input-group">
             <input type="text" id="aiPrompt" placeholder="Например: нежный букет в розовых тонах, утренний свет..." class="ai-input">
             <button class="btn-ai-generate" id="aiGenerateBtn">
-                <span>Сгенерировать</span>
+                <span>Сгенерировать AI</span>
                 <span class="btn-icon">✨</span>
             </button>
         </div>
-        <div class="ai-gallery">
-            <div class="ai-result">
-                <img src="images/bouquets/classic2.webp" alt="Нежность">
+        
+        <!-- Upload -->
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="bgUpload" accept="image/*" hidden>
+            <div class="upload-placeholder" onclick="document.getElementById('bgUpload').click()">
+                <span class="upload-icon">📤</span>
+                <span>Загрузить своё фото</span>
+                <small>Макс 5MB, 1920×1080</small>
+            </div>
+        </div>
+        <div id="uploadPreview" style="display:none; margin-top: 16px;">
+            <img id="uploadedImage" src="" alt="Загруженное" style="max-width: 100%; border-radius: 12px;">
+            <button class="btn-ai-generate" id="useUploadedBtn" style="margin-top: 10px;">
+                Использовать этот фон
+            </button>
+        </div>
+        
+        <!-- Gallery -->
+        <h3 class="gallery-title">Или выберите готовый</h3>
+        <div class="ai-gallery" id="galleryGrid">
+            <div class="ai-result" data-bg="romantic1">
+                <img src="images/bouquets/romantic1.webp" alt="Романтичное">
+                <span class="ai-result-label">Романтика</span>
+                <span class="ai-result-sub">Розовые пионы</span>
+            </div>
+            <div class="ai-result" data-bg="romantic2">
+                <img src="images/bouquets/romantic2.webp" alt="Нежность">
                 <span class="ai-result-label">Нежность</span>
+                <span class="ai-result-sub">Розовые розы</span>
+            </div>
+            <div class="ai-result" data-bg="classic1">
+                <img src="images/bouquets/classic1.webp" alt="Классика">
+                <span class="ai-result-label">Классика</span>
+                <span class="ai-result-sub">Розовый букет</span>
+            </div>
+            <div class="ai-result" data-bg="classic2">
+                <img src="images/bouquets/classic2.webp" alt="Чистота">
+                <span class="ai-result-label">Чистота</span>
                 <span class="ai-result-sub">Белые цветы</span>
             </div>
-            <div class="ai-result">
-                <img src="images/bouquets/romantic2.webp" alt="Спокойствие">
-                <span class="ai-result-label">Спокойствие</span>
-                <span class="ai-result-sub">Розы и пионы</span>
+            <div class="ai-result" data-bg="elegant1">
+                <img src="images/bouquets/elegant1.webp" alt="Элегантность">
+                <span class="ai-result-label">Элегантность</span>
+                <span class="ai-result-sub">Тёмный фон</span>
             </div>
-            <div class="ai-result">
+            <div class="ai-result" data-bg="elegant2">
                 <img src="images/bouquets/elegant2.webp" alt="Праздник">
                 <span class="ai-result-label">Праздник</span>
-                <span class="ai-result-sub">Яркий микс</span>
+                <span class="ai-result-sub">Пастельные тона</span>
             </div>
         </div>
     </section>
