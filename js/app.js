@@ -1,10 +1,7 @@
 ﻿// ===== ГЛАВНАЯ: СОЗДАНИЕ БУКЕТА =====
 
-// Проверяем и подключаем Supabase клиент
-if (typeof window.supabaseClient === 'undefined') {
-    console.error('Supabase client not loaded! Check js/supabase.js');
-}
-const supabaseClient = window.supabaseClient;
+// Используем глобальный supabaseClient из supabase.js
+// НЕ объявляем заново!
 
 const form = document.getElementById('bouquetForm');
 const resultPreview = document.getElementById('resultPreview');
@@ -82,7 +79,7 @@ async function handleFormSubmit(e) {
         mp3_link: mp3Link || null,
         bouquet_style: bgStyle ? bgStyle.value : 'romantic1',
         short_id: generateShortId(),
-        created_by: null // для неавторизованных пользователей
+        created_by: null
     };
 
     try {
