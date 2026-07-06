@@ -1,18 +1,9 @@
 ﻿// ===== АВТОРИЗАЦИЯ =====
 
-function getSupabase() {
-    if (typeof window !== 'undefined' && window.supabaseClient) {
-        return window.supabaseClient;
-    }
-    console.error('Supabase client not found!');
-    return null;
-}
+// Используем глобальный supabaseClient из supabase.js
 
 async function signInWithGoogle() {
-    const sb = getSupabase();
-    if (!sb) return;
-    
-    const { data, error } = await sb.auth.signInWithOAuth({
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
         provider: 'google',
         options: {
             redirectTo: `${window.location.origin}/dashboard.html`
@@ -22,10 +13,7 @@ async function signInWithGoogle() {
 }
 
 async function signInWithEmail(email, password) {
-    const sb = getSupabase();
-    if (!sb) return false;
-    
-    const { data, error } = await sb.auth.signInWithPassword({
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
         email,
         password
     });
@@ -37,10 +25,7 @@ async function signInWithEmail(email, password) {
 }
 
 async function signUpWithEmail(email, password) {
-    const sb = getSupabase();
-    if (!sb) return false;
-    
-    const { data, error } = await sb.auth.signUp({
+    const { data, error } = await supabaseClient.auth.signUp({
         email,
         password,
         options: {
@@ -56,10 +41,7 @@ async function signUpWithEmail(email, password) {
 }
 
 async function signOut() {
-    const sb = getSupabase();
-    if (!sb) return;
-    
-    const { error } = await sb.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut();
     if (error) {
         showToast(error.message, 'error');
         return;
@@ -68,31 +50,17 @@ async function signOut() {
 }
 
 async function getCurrentUser() {
-    const sb = getSupabase();
-    if (!sb) return null;
-    
-    const { data: { user } } = await sb.auth.getUser();
+    const { data: { user } } = await supabaseClient.auth.getUser();
     return user;
 }
 
-function initAuthListener() {
-    const sb = getSupabase();
-    if (!sb) return;
-    
-    sb.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN') {
-            updateAuthUI(session?.user);
-        } else if (event === 'SIGNED_OUT') {
-            updateAuthUI(null);
-        }
-    });
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAuthListener);
-} else {
-    initAuthListener();
-}
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN') {
+        updateAuthUI(session?.user);
+    } else if (event === 'SIGNED_OUT') {
+        updateAuthUI(null);
+    }
+});
 
 function updateAuthUI(user) {
     document.querySelectorAll('.auth-btn').forEach(btn => {
@@ -111,4 +79,3 @@ window.signInWithEmail = signInWithEmail;
 window.signUpWithEmail = signUpWithEmail;
 window.signOut = signOut;
 window.getCurrentUser = getCurrentUser;
-window.updateAuthUI = updateAuthUI;
