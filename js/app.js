@@ -1,5 +1,11 @@
 ﻿// ===== ГЛАВНАЯ: СОЗДАНИЕ БУКЕТА =====
 
+// Проверяем и подключаем Supabase клиент
+if (typeof window.supabaseClient === 'undefined') {
+    console.error('Supabase client not loaded! Check js/supabase.js');
+}
+const supabaseClient = window.supabaseClient;
+
 const form = document.getElementById('bouquetForm');
 const resultPreview = document.getElementById('resultPreview');
 const placeholderPreview = document.getElementById('placeholderPreview');
@@ -75,7 +81,8 @@ async function handleFormSubmit(e) {
         yandex_link: yandexLink || null,
         mp3_link: mp3Link || null,
         bouquet_style: bgStyle ? bgStyle.value : 'romantic1',
-        short_id: generateShortId()
+        short_id: generateShortId(),
+        created_by: null // для неавторизованных пользователей
     };
 
     try {
