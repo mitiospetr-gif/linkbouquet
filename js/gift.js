@@ -8,6 +8,9 @@ const mp3Btn = document.getElementById('mp3Btn');
 const linksContainer = document.getElementById('linksContainer');
 const authorText = document.getElementById('authorText');
 
+// Базовый URL для изображений (абсолютный путь)
+const BASE_URL = window.location.origin;
+
 async function loadGift() {
     const urlParams = new URLSearchParams(window.location.search);
     const shortId = urlParams.get('id');
@@ -37,11 +40,11 @@ async function loadGift() {
             // Кастомное изображение (AI или загруженное)
             giftBgImage.src = data.custom_image_url;
         } else if (data.bouquet_style && data.bouquet_style !== 'custom') {
-            // Готовый стиль из галереи
-            giftBgImage.src = `images/bouquets/${data.bouquet_style}.webp`;
+            // Готовый стиль из галереи - абсолютный путь
+            giftBgImage.src = `${BASE_URL}/images/bouquets/${data.bouquet_style}.webp`;
         } else {
             // По умолчанию
-            giftBgImage.src = 'images/bouquets/romantic1.webp';
+            giftBgImage.src = `${BASE_URL}/images/bouquets/romantic1.webp`;
         }
         
         // Текст поздравления
