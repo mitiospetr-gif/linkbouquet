@@ -1,7 +1,5 @@
 ﻿// Инициализация Supabase клиента
-const { createClient } = supabase;
-
-const supabaseClient = createClient(
+const supabaseClient = supabase.createClient(
     window.SUPABASE_CONFIG.url,
     window.SUPABASE_CONFIG.anonKey
 );
