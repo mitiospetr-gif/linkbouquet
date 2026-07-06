@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkBouquet — Музыкальные букеты с настроением</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="images/bouquets/romantic1.webp" alt="" class="hero-bg-img" id="heroBgImg">
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <header class="hero-header">
+                <div class="logo">
+                    <span class="logo-text">LinkBouquet</span>
+                    <span class="logo-flower">🌸</span>
+                </div>
+                <p class="tagline">Музыкальные букеты с настроением</p>
+            </header>
+
+            <div class="hero-steps">
+                <div class="step">
+                    <span class="step-icon">✏️</span>
+                    <span class="step-text">Создай поздравление</span>
+                </div>
+                <div class="step">
+                    <span class="step-icon">🔗</span>
+                    <span class="step-text">Добавь свои ссылки</span>
+                </div>
+                <div class="step">
+                    <span class="step-icon">🎁</span>
+                    <span class="step-text">Получи красивую ссылку</span>
+                </div>
+                <div class="step">
+                    <span class="step-icon">💛</span>
+                    <span class="step-text">Поделись с близкими</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Card -->
+        <div class="preview-card">
+            <div class="preview-flower-icon">🌸</div>
+            <h2 class="preview-title">Для тебя!</h2>
+            <p class="preview-text">Пусть каждый день приносит радость и вдохновение! Ты прекрасна!</p>
+            
+            <div class="preview-links">
+                <a href="#" class="preview-link youtube">
+                    <span class="preview-link-icon">▶️</span>
+                    <div class="preview-link-text">
+                        <span class="preview-link-title">Смотреть на YouTube</span>
+                        <span class="preview-link-sub">Клип для тебя</span>
+                    </div>
+                    <span class="preview-link-arrow">›</span>
+                </a>
+                <a href="#" class="preview-link yandex">
+                    <span class="preview-link-icon">💿</span>
+                    <div class="preview-link-text">
+                        <span class="preview-link-title">Видео на Яндекс Диск</span>
+                        <span class="preview-link-sub">Особенное видео</span>
+                    </div>
+                    <span class="preview-link-arrow">›</span>
+                </a>
+                <a href="#" class="preview-link mp3">
+                    <span class="preview-link-icon">🎵</span>
+                    <div class="preview-link-text">
+                        <span class="preview-link-title">Скачать MP3</span>
+                        <span class="preview-link-sub">Музыка для души</span>
+                    </div>
+                    <span class="preview-link-arrow">›</span>
+                </a>
+            </div>
+            
+            <p class="preview-footer">С любовью 💗</p>
+        </div>
+    </section>
+
+    <!-- Smart Backgrounds -->
+    <section class="backgrounds-section">
+        <h2 class="section-title">Умные фоны для любого настроения</h2>
+        <div class="bg-grid">
+            <div class="bg-card active" data-bg="romantic1">
+                <img src="images/bouquets/romantic1.webp" alt="Романтичное">
+                <div class="bg-card-overlay">
+                    <span class="bg-icon">💗</span>
+                    <span class="bg-label">Романтичное</span>
+                </div>
+            </div>
+            <div class="bg-card" data-bg="classic1">
+                <img src="images/bouquets/classic1.webp" alt="Классическое">
+                <div class="bg-card-overlay">
+                    <span class="bg-icon">✨</span>
+                    <span class="bg-label">Классическое</span>
+                </div>
+            </div>
+            <div class="bg-card" data-bg="elegant1">
+                <img src="images/bouquets/elegant1.webp" alt="Элегантное">
+                <div class="bg-card-overlay">
+                    <span class="bg-icon">🌙</span>
+                    <span class="bg-label">Элегантное</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Generation -->
+    <section class="ai-section">
+        <h2 class="section-title">Генерация фона с AI</h2>
+        <p class="ai-subtitle">Опиши настроение или идею, а AI создаст уникальный фон</p>
+        <div class="ai-input-group">
+            <input type="text" id="aiPrompt" placeholder="Например: нежный букет в розовых тонах, утренний свет..." class="ai-input">
+            <button class="btn-ai-generate" id="aiGenerateBtn">
+                <span>Сгенерировать</span>
+                <span class="btn-icon">✨</span>
+            </button>
+        </div>
+        <div class="ai-gallery">
+            <div class="ai-result">
+                <img src="images/bouquets/classic2.webp" alt="Нежность">
+                <span class="ai-result-label">Нежность</span>
+                <span class="ai-result-sub">Белые цветы</span>
+            </div>
+            <div class="ai-result">
+                <img src="images/bouquets/romantic2.webp" alt="Спокойствие">
+                <span class="ai-result-label">Спокойствие</span>
+                <span class="ai-result-sub">Розы и пионы</span>
+            </div>
+            <div class="ai-result">
+                <img src="images/bouquets/elegant2.webp" alt="Праздник">
+                <span class="ai-result-label">Праздник</span>
+                <span class="ai-result-sub">Яркий микс</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Bouquet -->
+    <section class="create-section" id="create">
+        <h2 class="section-title">Создание букета за 3 шага</h2>
+        
+        <div class="create-steps">
+            <!-- Step 1 -->
+            <div class="create-step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Добавь поздравление и ссылки</h3>
+                <form id="bouquetForm" class="bouquet-form">
+                    <div class="form-group">
+                        <label>Текст поздравления</label>
+                        <textarea id="greetingText" placeholder="Текст поздравления..." rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>YouTube ссылка</label>
+                        <input type="url" id="youtubeLink" placeholder="YouTube ссылка">
+                    </div>
+                    <div class="form-group">
+                        <label>Ссылка на видео (Яндекс.Диск)</label>
+                        <input type="url" id="yandexLink" placeholder="Ссылка на видео (Яндекс.Диск)">
+                    </div>
+                    <div class="form-group">
+                        <label>Ссылка на MP3</label>
+                        <input type="url" id="mp3Link" placeholder="Ссылка на MP3">
+                    </div>
+                    <div class="form-group">
+                        <label>Выберите фон</label>
+                        <select id="bgStyle" required>
+                            <option value="romantic1">Романтичное (розовые пионы)</option>
+                            <option value="romantic2">Романтичное (розы)</option>
+                            <option value="classic1">Классическое (розовый)</option>
+                            <option value="classic2">Классическое (белый)</option>
+                            <option value="elegant1">Элегантное (тёмный)</option>
+                            <option value="elegant2">Элегантное (пастель)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-create">Создать букет</button>
+                </form>
+            </div>
+
+            <div class="step-arrow">→</div>
+
+            <!-- Step 2 -->
+            <div class="create-step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">AI подберёт фон по настроению</h3>
+                <div class="step-preview">
+                    <img src="images/bouquets/romantic1.webp" alt="AI подбор" id="step2Preview">
+                    <div class="step-preview-overlay">
+                        <span class="ai-badge">🤖 AI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-arrow">→</div>
+
+            <!-- Step 3 -->
+            <div class="create-step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Получите красивую ссылку и делитесь!</h3>
+                <div class="result-preview" id="resultPreview" style="display:none;">
+                    <div class="link-box">
+                        <span class="link-url" id="giftLink">linkbouquet.com/b/AbCdEfGh</span>
+                        <button class="btn-copy-link" id="copyLinkBtn">📋</button>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-result btn-copy" id="copyBtn">Скопировать ссылку</button>
+                        <button class="btn-result btn-open" id="openBtn">Открыть ↗</button>
+                    </div>
+                    <div class="qr-section">
+                        <div id="qrContainer"></div>
+                    </div>
+                </div>
+                <div class="placeholder-preview" id="placeholderPreview">
+                    <p>Ссылка появится здесь после создания букета</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Different Bouquets -->
+    <section class="gallery-section">
+        <h2 class="section-title">Разные букеты для разных треков</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/bouquets/romantic1.webp" alt="Романтика">
+                <div class="gallery-overlay">
+                    <span class="gallery-play">▶</span>
+                    <span class="gallery-label">Романтика</span>
+                    <span class="gallery-sub">Розы и пионы</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/bouquets/classic1.webp" alt="Классика">
+                <div class="gallery-overlay">
+                    <span class="gallery-play">▶</span>
+                    <span class="gallery-label">Классика</span>
+                    <span class="gallery-sub">Розовый букет</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/bouquets/elegant1.webp" alt="Элегантность">
+                <div class="gallery-overlay">
+                    <span class="gallery-play">▶</span>
+                    <span class="gallery-label">Элегантность</span>
+                    <span class="gallery-sub">Тёмный фон</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/bouquets/romantic2.webp" alt="Нежность">
+                <div class="gallery-overlay">
+                    <span class="gallery-play">▶</span>
+                    <span class="gallery-label">Нежность</span>
+                    <span class="gallery-sub">Розовые розы</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/bouquets/classic2.webp" alt="Чистота">
+                <div class="gallery-overlay">
+                    <span class="gallery-play">▶</span>
+                    <span class="gallery-label">Чистота</span>
+                    <span class="gallery-sub">Белые цветы</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/bouquets/elegant2.webp" alt="Праздник">
+                <div class="gallery-overlay">
+                    <span class="gallery-play">▶</span>
+                    <span class="gallery-label">Праздник</span>
+                    <span class="gallery-sub">Пастельные тона</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature">
+                <span class="feature-icon">🍃</span>
+                <span class="feature-title">Работает без регистрации</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📦</span>
+                <span class="feature-title">Без базы данных и серверов</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">⚡</span>
+                <span class="feature-title">Быстро и безопасно</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📱</span>
+                <span class="feature-title">Красиво на любых устройствах</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <p>LinkBouquet — музыкальные букеты с настроением 🌸</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

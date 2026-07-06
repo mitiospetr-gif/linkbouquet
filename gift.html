@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш персональный букет</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="gift-page">
+    <div class="gift-bg">
+        <img id="giftBgImage" src="" alt="" class="gift-bg-img">
+        <div class="gift-bg-overlay"></div>
+    </div>
+
+    <div class="gift-container">
+        <div class="gift-card">
+            <div class="gift-flower-icon">🌸</div>
+            <h1 class="gift-title">Для тебя!</h1>
+            
+            <p id="greetingText" class="gift-text"></p>
+            
+            <div class="gift-links" id="linksContainer">
+                <a id="youtubeBtn" href="#" target="_blank" class="gift-link youtube">
+                    <span class="gift-link-icon">▶️</span>
+                    <div class="gift-link-info">
+                        <span class="gift-link-title">Смотреть на YouTube</span>
+                        <span class="gift-link-sub">Клип для тебя</span>
+                    </div>
+                    <span class="gift-link-arrow">›</span>
+                </a>
+                <a id="yandexBtn" href="#" target="_blank" class="gift-link yandex">
+                    <span class="gift-link-icon">💿</span>
+                    <div class="gift-link-info">
+                        <span class="gift-link-title">Видео на Яндекс Диск</span>
+                        <span class="gift-link-sub">Особенное видео</span>
+                    </div>
+                    <span class="gift-link-arrow">›</span>
+                </a>
+                <a id="mp3Btn" href="#" target="_blank" class="gift-link mp3">
+                    <span class="gift-link-icon">🎵</span>
+                    <div class="gift-link-info">
+                        <span class="gift-link-title">Скачать MP3</span>
+                        <span class="gift-link-sub">Музыка для души</span>
+                    </div>
+                    <span class="gift-link-arrow">›</span>
+                </a>
+            </div>
+            
+            <p id="authorText" class="gift-author"></p>
+            <p class="gift-footer-text">С любовью <span class="heart">💗</span></p>
+        </div>
+        
+        <a href="/" class="create-own-link">Создать свой букет →</a>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/gift.js"></script>
+</body>
+</html>
