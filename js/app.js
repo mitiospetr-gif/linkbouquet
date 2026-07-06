@@ -59,6 +59,16 @@ if (openBtn) {
 async function handleFormSubmit(e) {
     e.preventDefault();
     
+    // Проверяем авторизацию
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    if (!user) {
+        showToast('Пожалуйста, войдите в систему', 'error');
+        setTimeout(() => {
+            window.location.href = '/login.html';
+        }, 1500);
+        return;
+    }
+    
     const submitBtn = form.querySelector('.btn-create');
     setLoading(submitBtn, true);
 
@@ -79,7 +89,7 @@ async function handleFormSubmit(e) {
         mp3_link: mp3Link || null,
         bouquet_style: bgStyle ? bgStyle.value : 'romantic1',
         short_id: generateShortId(),
-        created_by: null
+        created_by: user.id
     };
 
     try {
