@@ -1479,4 +1479,52 @@ section {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-}       
+}      
+/* Auth buttons */
+.auth-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.btn-login {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-login:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero header positioning */
+.hero-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+/* Adjust logo positioning when auth button present */
+.hero-header .logo {
+    flex: 1;
+}
+
+.hero-header .tagline {
+    width: 100%;
+    margin-top: 10px;
+}
