@@ -80,6 +80,17 @@ async function handleFormSubmit(e) {
         return;
     }
 
+    // Определяем фон
+    let selectedStyle = bgStyle ? bgStyle.value : 'romantic1';
+    let customImageUrl = null;
+    
+    // Если выбран кастомный фон (AI или загруженный)
+    if (window.customBgImage || window.generatedAiImage) {
+        customImageUrl = window.customBgImage || window.generatedAiImage;
+        // Сохраняем последний использованный стиль как базовый
+        selectedStyle = 'custom';
+    }
+
     const bouquetData = {
         title: greetingText || 'Букет без названия',
         url: youtubeLink || yandexLink || mp3Link || 'https://example.com',
@@ -88,7 +99,8 @@ async function handleFormSubmit(e) {
         youtube_link: youtubeLink || null,
         yandex_link: yandexLink || null,
         mp3_link: mp3Link || null,
-        bouquet_style: bgStyle ? bgStyle.value : 'romantic1',
+        bouquet_style: selectedStyle,
+        custom_image_url: customImageUrl,
         short_id: generateShortId(),
         created_by: user.id
     };
@@ -160,7 +172,19 @@ if (aiGenerateBtn) {
             img.onload = () => {
                 if (step2Preview) step2Preview.src = imageUrl;
                 if (heroBgImg) heroBgImg.src = imageUrl;
-                if (bgStyle) bgStyle.value = 'custom';
+                
+                // Устанавливаем значение в select
+                if (bgStyle) {
+                    // Проверяем есть ли опция custom, если нет — добавляем
+                    let customOption = bgStyle.querySelector('option[value="custom"]');
+                    if (!customOption) {
+                        customOption = document.createElement('option');
+                        customOption.value = 'custom';
+                        customOption.textContent = 'AI/Загруженный';
+                        bgStyle.appendChild(customOption);
+                    }
+                    bgStyle.value = 'custom';
+                }
                 
                 window.customBgImage = imageUrl;
                 window.generatedAiImage = imageUrl;
@@ -211,7 +235,18 @@ if (useUploadedBtn) {
         if (window.uploadedBgImage) {
             if (step2Preview) step2Preview.src = window.uploadedBgImage;
             if (heroBgImg) heroBgImg.src = window.uploadedBgImage;
-            if (bgStyle) bgStyle.value = 'custom';
+            
+            // Устанавливаем значение в select
+            if (bgStyle) {
+                let customOption = bgStyle.querySelector('option[value="custom"]');
+                if (!customOption) {
+                    customOption = document.createElement('option');
+                    customOption.value = 'custom';
+                    customOption.textContent = 'AI/Загруженный';
+                    bgStyle.appendChild(customOption);
+                }
+                bgStyle.value = 'custom';
+            }
             
             window.customBgImage = window.uploadedBgImage;
             
