@@ -171,14 +171,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .preview-card {
   position: relative;
   z-index: 2;
-  background: var(--bg-card);
+  background: #152340;
   border-radius: var(--border-radius);
   padding: clamp(1.2rem, 4vw, 2rem);
   width: 100%;
   max-width: 420px;
   margin-top: var(--spacing-lg);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .preview-flower-icon {
@@ -192,12 +193,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: clamp(1.3rem, 4vw, 1.8rem);
   text-align: center;
   margin-bottom: var(--spacing-sm);
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .preview-text {
   text-align: center;
-  color: var(--text-muted);
+  color: #8a9bb8;
   font-size: clamp(0.85rem, 2.5vw, 1rem);
   margin-bottom: var(--spacing-md);
   line-height: 1.5;
@@ -216,13 +217,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 0.75rem;
   padding: 0.75rem 1rem;
   border-radius: 12px;
-  background: #f8f9fa;
+  background: #1c2d4a;
   transition: var(--transition);
   min-height: var(--touch-min);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .preview-link:hover {
-  background: #e9ecef;
+  background: #243a5c;
   transform: translateX(4px);
 }
 
@@ -245,23 +247,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .preview-link-title {
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .preview-link-sub {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #8a9bb8;
 }
 
 .preview-link-arrow {
   font-size: 1.2rem;
-  color: var(--text-muted);
+  color: #8a9bb8;
   flex-shrink: 0;
 }
 
 .preview-footer {
   text-align: center;
-  color: var(--text-muted);
+  color: #8a9bb8;
   font-size: 0.85rem;
 }
 
@@ -972,11 +974,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .auth-card {
-  background: var(--bg-card);
+  background: #152340;
   border-radius: var(--border-radius);
   padding: clamp(1.5rem, 5vw, 2.5rem);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .auth-card .logo {
@@ -989,7 +992,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: clamp(1.2rem, 4vw, 1.6rem);
   text-align: center;
   margin-bottom: var(--spacing-lg);
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .email-auth-form {
@@ -1246,12 +1249,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .gift-card {
-  background: var(--bg-card);
+  background: #152340;
   border-radius: var(--border-radius);
   padding: clamp(1.5rem, 5vw, 2.5rem);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
   width: 100%;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .gift-flower-icon {
@@ -1265,12 +1269,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: clamp(1.5rem, 5vw, 2rem);
   text-align: center;
   margin-bottom: var(--spacing-md);
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .gift-text {
   text-align: center;
-  color: var(--text-muted);
+  color: #8a9bb8;
   font-size: clamp(0.9rem, 3vw, 1.05rem);
   margin-bottom: var(--spacing-md);
   line-height: 1.6;
@@ -1289,13 +1293,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 0.75rem;
   padding: 0.875rem 1rem;
   border-radius: 12px;
-  background: #f8f9fa;
+  background: #1c2d4a;
   transition: var(--transition);
   min-height: var(--touch-min);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .gift-link:hover {
-  background: #e9ecef;
+  background: #243a5c;
   transform: translateX(4px);
 }
 
@@ -1318,23 +1323,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .gift-link-title {
   font-weight: 600;
   font-size: 0.95rem;
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .gift-link-sub {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #8a9bb8;
 }
 
 .gift-link-arrow {
   font-size: 1.3rem;
-  color: var(--text-muted);
+  color: #8a9bb8;
   flex-shrink: 0;
 }
 
 .gift-author {
   text-align: center;
-  color: var(--text-muted);
+  color: #8a9bb8;
   font-size: 0.85rem;
   margin-bottom: var(--spacing-xs);
   font-style: italic;
@@ -1342,7 +1347,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .gift-footer-text {
   text-align: center;
-  color: var(--text-muted);
+  color: #8a9bb8;
   font-size: 0.9rem;
 }
 
