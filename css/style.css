@@ -1,13 +1,12 @@
 /* ============================================
    LinkBouquet — Responsive Styles
-   Mobile-first + Desktop enhancements
+   Original design preserved + mobile fixes
    ============================================ */
 
 :root {
   --primary: #e91e63;
   --primary-dark: #c2185b;
   --accent: #ff4081;
-  --bg-dark: rgba(0, 0, 0, 0.6);
   --bg-card: rgba(255, 255, 255, 0.95);
   --text-light: #fff;
   --text-dark: #333;
@@ -40,7 +39,7 @@ a { text-decoration: none; color: inherit; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
 /* ============================================
-   HERO — СИНИЙ/ТЁМНЫЙ ФОН
+   HERO — ОРИГИНАЛЬНЫЙ ДИЗАЙН (фон от картинки)
    ============================================ */
 .hero {
   position: relative;
@@ -51,8 +50,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   justify-content: center;
   padding: var(--spacing-md);
   overflow: hidden;
-  /* Фолбэк фон — синий градиент */
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 .hero-bg {
@@ -71,7 +68,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(15, 52, 96, 0.85) 0%, rgba(22, 33, 62, 0.7) 50%, rgba(26, 26, 46, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
   z-index: 1;
 }
 
@@ -284,7 +281,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .backgrounds-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #f0f4f8 0%, #fff 100%);
+  background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
 }
 
 .bg-grid {
@@ -352,7 +349,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .ai-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #e8ecf1 0%, #f5f7fa 100%);
+  background: #f5f5f5;
 }
 
 .ai-subtitle {
@@ -374,7 +371,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .ai-input {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 2px solid #d0d7de;
+  border: 2px solid #e0e0e0;
   border-radius: 12px;
   font-size: 1rem;
   font-family: inherit;
@@ -420,13 +417,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .upload-placeholder {
-  border: 2px dashed #b0b8c1;
+  border: 2px dashed #ccc;
   border-radius: var(--border-radius);
   padding: var(--spacing-lg);
   text-align: center;
   cursor: pointer;
   transition: var(--transition);
-  background: #f8fafc;
+  background: #fafafa;
   min-height: 120px;
   display: flex;
   flex-direction: column;
@@ -505,7 +502,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .create-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  background: #fff;
 }
 
 .create-steps {
@@ -518,11 +515,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .create-step {
-  background: linear-gradient(135deg, #f0f4f8 0%, #e8ecf1 100%);
+  background: #fafafa;
   border-radius: var(--border-radius);
   padding: var(--spacing-md);
   flex: 1;
   min-width: 0;
+  width: 100%;
 }
 
 .step-number {
@@ -579,7 +577,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .form-group select {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid #d0d7de;
+  border: 2px solid #e0e0e0;
   border-radius: 10px;
   font-family: inherit;
   font-size: 1rem;
@@ -673,12 +671,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   box-shadow: var(--shadow);
 }
 
-/* Result Preview */
+/* Result Preview — ИСПРАВЛЕНО */
 .result-preview {
   background: #fff;
   border-radius: var(--border-radius);
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .link-box {
@@ -686,32 +687,35 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   align-items: center;
   gap: var(--spacing-xs);
   background: #f5f5f5;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 10px;
   margin-bottom: var(--spacing-sm);
+  min-width: 0;
 }
 
 .link-url {
   flex: 1;
   font-family: monospace;
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
   color: var(--text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-width: 0;
 }
 
 .btn-copy-link {
-  padding: 0.5rem;
+  padding: 0.4rem;
   border-radius: 8px;
   background: #fff;
   border: 1px solid #e0e0e0;
-  min-height: 36px;
-  min-width: 36px;
+  min-height: 32px;
+  min-width: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .btn-copy-link:hover {
@@ -721,16 +725,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .result-actions {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
 }
 
 .btn-result {
-  flex: 1;
-  padding: 0.75rem;
+  width: 100%;
+  padding: 0.6rem;
   border-radius: 10px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   transition: var(--transition);
   min-height: var(--touch-min);
   text-align: center;
@@ -754,16 +758,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .qr-section {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-xs);
 }
 
 .placeholder-preview {
   text-align: center;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
   color: var(--text-muted);
   background: #f5f5f5;
   border-radius: var(--border-radius);
   border: 2px dashed #e0e0e0;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
 }
 
 /* ============================================
@@ -771,7 +776,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .gallery-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #fff 0%, #f0f4f8 100%);
+  background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
 }
 
 .gallery-grid {
@@ -859,7 +864,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .features-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+  background: #fff;
 }
 
 .features-grid {
@@ -896,14 +901,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .main-footer {
   text-align: center;
   padding: var(--spacing-lg) var(--spacing-md);
-  background: linear-gradient(180deg, #f0f4f8 0%, #e8ecf1 100%);
+  background: #fafafa;
   color: var(--text-muted);
   font-size: 0.9rem;
-  border-top: 1px solid #d0d7de;
+  border-top: 1px solid #eee;
 }
 
 /* ============================================
-   AUTH PAGES (Login) — СИНИЙ ФОН
+   AUTH PAGES (Login) — ОРИГИНАЛЬНЫЙ ДИЗАЙН
    ============================================ */
 .auth-page {
   min-height: 100vh;
@@ -912,7 +917,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   justify-content: center;
   position: relative;
   padding: var(--spacing-md);
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 .auth-bg {
@@ -931,7 +935,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .auth-bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(15, 52, 96, 0.85) 0%, rgba(22, 33, 62, 0.7) 50%, rgba(26, 26, 46, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
   z-index: 1;
 }
 
@@ -993,12 +997,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ============================================
-   DASHBOARD PAGE — СИНИЙ ФОН
+   DASHBOARD PAGE — ОРИГИНАЛЬНЫЙ ДИЗАЙН
    ============================================ */
 .dashboard-page {
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 .dashboard-bg {
@@ -1017,7 +1020,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .dashboard-bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(15, 52, 96, 0.85) 0%, rgba(22, 33, 62, 0.7) 50%, rgba(26, 26, 46, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 100%);
   z-index: 1;
 }
 
@@ -1178,7 +1181,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ============================================
-   GIFT PAGE — СИНИЙ ФОН
+   GIFT PAGE — ОРИГИНАЛЬНЫЙ ДИЗАЙН
    ============================================ */
 .gift-page {
   min-height: 100vh;
@@ -1187,7 +1190,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   justify-content: center;
   position: relative;
   padding: var(--spacing-md);
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 .gift-bg {
@@ -1206,7 +1208,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .gift-bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(15, 52, 96, 0.85) 0%, rgba(22, 33, 62, 0.7) 50%, rgba(26, 26, 46, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
   z-index: 1;
 }
 
@@ -1378,6 +1380,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .create-steps {
     flex-direction: row;
     align-items: stretch;
+    flex-wrap: nowrap;
   }
 
   .step-arrow {
@@ -1387,6 +1390,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
   .create-step {
     min-width: 0;
+    width: auto;
+  }
+
+  .result-actions {
+    flex-direction: row;
   }
 
   .dashboard-header {
@@ -1421,11 +1429,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
   .btn-create, .btn-secondary {
     flex: 1;
-  }
-
-  /* На десктопе кнопки в строку */
-  .result-actions {
-    flex-direction: row;
   }
 }
 
@@ -1505,11 +1508,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Кнопки результата в колонку на маленьких экранах */
-  .result-actions {
-    flex-direction: column;
-  }
-
   .dashboard-container {
     padding: var(--spacing-sm);
   }
@@ -1527,7 +1525,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     padding: var(--spacing-sm);
   }
 
-  /* Уменьшаем шаги создания */
   .create-steps {
     gap: var(--spacing-md);
   }
