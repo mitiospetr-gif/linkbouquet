@@ -281,7 +281,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .backgrounds-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+  background: linear-gradient(180deg, #0f1d33 0%, #0a1628 100%);
 }
 
 .bg-grid {
@@ -349,7 +349,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .ai-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: #f5f5f5;
+  background: #0a1628;
 }
 
 .ai-subtitle {
@@ -371,18 +371,21 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .ai-input {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 2px solid #e0e0e0;
+  border: 2px solid rgba(255,255,255,0.15);
   border-radius: 12px;
   font-size: 1rem;
   font-family: inherit;
   transition: var(--transition);
   min-height: var(--touch-min);
+  background: #1c2d4a;
+  color: #e8edf5;
 }
 
 .ai-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+  background: #243a5c;
 }
 
 .btn-ai-generate {
@@ -417,24 +420,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .upload-placeholder {
-  border: 2px dashed #ccc;
+  border: 2px dashed rgba(255,255,255,0.2);
   border-radius: var(--border-radius);
   padding: var(--spacing-lg);
   text-align: center;
   cursor: pointer;
   transition: var(--transition);
-  background: #fafafa;
+  background: #152340;
   min-height: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  color: #8a9bb8;
 }
 
 .upload-placeholder:hover {
   border-color: var(--primary);
-  background: #fff5f7;
+  background: #1c2d4a;
 }
 
 .upload-icon {
@@ -445,7 +449,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: var(--spacing-md);
-  color: var(--text-muted);
+  color: #8a9bb8;
 }
 
 .ai-gallery {
@@ -502,7 +506,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .create-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: #fff;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.create-section .section-title {
+  color: var(--text-light);
+}
+
+.create-step {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  flex: 1;
+  min-width: 0;
+  width: 100%;
 }
 
 .create-steps {
@@ -515,12 +532,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .create-step {
-  background: #fafafa;
+  background: #152340;
   border-radius: var(--border-radius);
   padding: var(--spacing-md);
   flex: 1;
   min-width: 0;
   width: 100%;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .step-number {
@@ -541,7 +559,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 3vw, 1.4rem);
   margin-bottom: var(--spacing-md);
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .step-arrow {
@@ -569,7 +587,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .form-group label {
   font-weight: 500;
   font-size: 0.9rem;
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 .form-group input,
@@ -577,13 +595,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .form-group select {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid #e0e0e0;
+  border: 2px solid rgba(255,255,255,0.12);
   border-radius: 10px;
   font-family: inherit;
   font-size: 1rem;
   transition: var(--transition);
   min-height: var(--touch-min);
-  background: #fff;
+  background: #1c2d4a;
+  color: #e8edf5;
 }
 
 .form-group input:focus,
@@ -591,7 +610,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .form-group select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+  background: #243a5c;
 }
 
 .form-group textarea {
@@ -673,24 +693,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* Result Preview — ИСПРАВЛЕНО */
 .result-preview {
-  background: #fff;
+  background: #152340;
   border-radius: var(--border-radius);
   padding: var(--spacing-sm);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .link-box {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  background: #f5f5f5;
+  background: #1c2d4a;
   padding: 0.5rem 0.75rem;
   border-radius: 10px;
   margin-bottom: var(--spacing-sm);
   min-width: 0;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .link-url {
@@ -747,8 +769,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .btn-open {
-  background: #f5f5f5;
-  color: var(--text-dark);
+  background: #1c2d4a;
+  color: #e8edf5;
 }
 
 .btn-result:hover {
@@ -764,10 +786,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .placeholder-preview {
   text-align: center;
   padding: var(--spacing-md);
-  color: var(--text-muted);
-  background: #f5f5f5;
+  color: #8a9bb8;
+  background: #1c2d4a;
   border-radius: var(--border-radius);
-  border: 2px dashed #e0e0e0;
+  border: 2px dashed rgba(255,255,255,0.15);
   font-size: clamp(0.8rem, 2.5vw, 1rem);
 }
 
@@ -776,7 +798,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .gallery-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+  background: linear-gradient(180deg, #0a1628 0%, #0f1d33 100%);
 }
 
 .gallery-grid {
@@ -864,7 +886,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ============================================ */
 .features-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: #fff;
+  background: #0a1628;
 }
 
 .features-grid {
@@ -892,7 +914,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .feature-title {
   font-weight: 600;
   font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-  color: var(--text-dark);
+  color: #e8edf5;
 }
 
 /* ============================================
@@ -901,10 +923,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .main-footer {
   text-align: center;
   padding: var(--spacing-lg) var(--spacing-md);
-  background: #fafafa;
-  color: var(--text-muted);
+  background: #0a1628;
+  color: #8a9bb8;
   font-size: 0.9rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 /* ============================================
@@ -1586,3 +1608,76 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   white-space: nowrap;
   border-width: 0;
 }
+
+
+/* ============================================
+   DARK SECTION TEXT COLORS
+   ============================================ */
+
+.ai-section,
+.backgrounds-section,
+.gallery-section,
+.features-section {
+  color: #e8edf5;
+}
+
+.ai-section p,
+.backgrounds-section p,
+.gallery-section p,
+.features-section p {
+  color: #8a9bb8;
+}
+
+/* Upload area text */
+.upload-area {
+  color: #8a9bb8;
+}
+
+/* AI subtitle */
+.ai-subtitle {
+  color: #8a9bb8;
+}
+
+/* ============================================
+   DARK THEME OVERRIDES — тёмно-синий фон
+   ============================================ */
+
+.backgrounds-section .section-title,
+.ai-section .section-title,
+.gallery-section .section-title,
+.features-section .section-title {
+  color: #e8edf5;
+}
+
+.ai-section .ai-subtitle {
+  color: #8a9bb8;
+}
+
+/* Preview links in create step */
+.preview-link {
+  background: #1c2d4a;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.preview-link:hover {
+  background: #243a5c;
+}
+
+.preview-link-title {
+  color: #e8edf5;
+}
+
+.preview-link-sub {
+  color: #8a9bb8;
+}
+
+/* Feature text */
+.feature {
+  color: #8a9bb8;
+}
+
+/* Gallery overlay text already white, good */
+
+/* Auth card on login page stays light (it's over image) */
+/* Gift card stays light (it's over image) */
+/* Preview card stays light (it's over image) */
