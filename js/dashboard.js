@@ -1,11 +1,20 @@
-﻿// ===== ЛИЧНЫЙ КАБИНЕТ =====
+// ===== ЛИЧНЫЙ КАБИНЕТ / МОИ БУКЕТЫ =====
+
+const ADMIN_EMAIL = 'mitiospetr@gmail.com';
 
 document.addEventListener('DOMContentLoaded', initDashboard);
 
 async function initDashboard() {
     const user = await getCurrentUser();
     if (!user) {
-        window.location.href = '/login.html';
+        window.location.href = '/login.html?redirect=/dashboard.html';
+        return;
+    }
+
+    // Проверяем админа
+    if (user.email !== ADMIN_EMAIL) {
+        showToast('Доступ запрещён', 'error');
+        setTimeout(() => window.location.href = '/', 2000);
         return;
     }
 
@@ -21,15 +30,7 @@ async function loadProfile(user) {
     const userEmailEl = document.getElementById('userEmail');
 
     if (userEmailEl) userEmailEl.textContent = user.email;
-
-    const { data: profile } = await supabaseClient
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-    const name = profile?.display_name || user.email.split('@')[0];
-    if (displayNameEl) displayNameEl.textContent = name;
+    if (displayNameEl) displayNameEl.textContent = 'Администратор';
 }
 
 async function loadBouquets(userId) {
@@ -84,6 +85,12 @@ async function loadBouquets(userId) {
             });
         });
 
+        container.querySelectorAll('.btn-open').forEach(btn => {
+            btn.addEventListener('click', e => {
+                window.open(e.currentTarget.dataset.url, '_blank');
+            });
+        });
+
     } catch (err) {
         console.error('Error:', err);
         showToast('Ошибка загрузки букетов', 'error');
@@ -92,22 +99,25 @@ async function loadBouquets(userId) {
 
 function createCard(b) {
     const url = `${window.location.origin}/gift.html?id=${b.short_id}`;
-    const img = `images/bouquets/${b.bouquet_style}.webp`;
+    const img = b.custom_image_url || `images/bouquets/${b.bouquet_style}.webp`;
+    const recipient = b.recipient_name ? `для ${esc(b.recipient_name)}` : '';
 
     return `
         <div class="bouquet-card">
             <div class="bouquet-card-image">
-                <img src="${img}" alt="${esc(b.greeting_text || 'Букет')}" loading="lazy">
+                <img src="${img}" alt="${esc(b.greeting_text || 'Букет')}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
             </div>
             <div class="bouquet-card-content">
                 <h4 class="bouquet-card-title">${esc(b.greeting_text?.substring(0, 30) || 'Букет')}${b.greeting_text?.length > 30 ? '...' : ''}</h4>
+                <p class="bouquet-card-text" style="color: var(--primary); font-size: 0.85rem;">${recipient}</p>
                 <p class="bouquet-card-text">${esc(b.greeting_text?.substring(0, 60) || '')}${b.greeting_text?.length > 60 ? '...' : ''}</p>
                 <div class="bouquet-card-meta">
                     <span>👁 ${b.view_count || 0}</span>
                     <span>${formatDate(b.created_at)}</span>
                 </div>
                 <div class="bouquet-card-actions">
-                    <button class="btn-card btn-copy-link" data-url="${url}" title="Копировать">📋</button>
+                    <button class="btn-card btn-open" data-url="${url}" title="Открыть">👁</button>
+                    <button class="btn-card btn-copy-link" data-url="${url}" title="Копировать ссылку">📋</button>
                     <button class="btn-card btn-share" data-url="${url}" data-title="${esc(b.greeting_text || 'Букет')}" title="Поделиться">📤</button>
                     <button class="btn-card btn-delete" data-id="${b.id}" title="Удалить">🗑️</button>
                 </div>
@@ -123,7 +133,7 @@ function esc(t) {
 }
 
 async function deleteBouquet(id) {
-    if (!confirm('Удалить букет?')) return;
+    if (!confirm('Удалить букет? Это действие нельзя отменить.')) return;
 
     try {
         const { error } = await supabaseClient

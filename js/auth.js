@@ -1,16 +1,5 @@
-﻿// ===== АВТОРИЗАЦИЯ =====
-
-// Используем глобальный supabaseClient из supabase.js
-
-async function signInWithGoogle() {
-    const { data, error } = await supabaseClient.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-            redirectTo: `${window.location.origin}/dashboard.html`
-        }
-    });
-    if (error) showToast(error.message, 'error');
-}
+// ===== АВТОРИЗАЦИЯ (ТОЛЬКО ВХОД) =====
+// Регистрация отключена — только админ входит
 
 async function signInWithEmail(email, password) {
     const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -21,22 +10,6 @@ async function signInWithEmail(email, password) {
         showToast(error.message, 'error');
         return false;
     }
-    return true;
-}
-
-async function signUpWithEmail(email, password) {
-    const { data, error } = await supabaseClient.auth.signUp({
-        email,
-        password,
-        options: {
-            emailRedirectTo: `${window.location.origin}/dashboard.html`
-        }
-    });
-    if (error) {
-        showToast(error.message, 'error');
-        return false;
-    }
-    showToast('Проверьте почту для подтверждения!');
     return true;
 }
 
@@ -65,17 +38,15 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
 function updateAuthUI(user) {
     document.querySelectorAll('.auth-btn').forEach(btn => {
         if (user) {
-            btn.textContent = '👤 Личный кабинет';
+            btn.textContent = '👤 Админ';
             btn.href = '/dashboard.html';
         } else {
-            btn.textContent = '🔐 Войти';
+            btn.textContent = '🔐 Войти как автор';
             btn.href = '/login.html';
         }
     });
 }
 
-window.signInWithGoogle = signInWithGoogle;
 window.signInWithEmail = signInWithEmail;
-window.signUpWithEmail = signUpWithEmail;
 window.signOut = signOut;
 window.getCurrentUser = getCurrentUser;
