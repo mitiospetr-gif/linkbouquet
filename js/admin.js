@@ -83,6 +83,7 @@ async function handleFormSubmit(e) {
 
     // Минимальный набор полей — только то, что точно есть в таблице
     const bouquetData = {
+        title: greetingText.substring(0, 100) || 'Букет',
         greeting_text: greetingText,
         youtube_link: youtubeLink || null,
         yandex_link: yandexLink || null,
