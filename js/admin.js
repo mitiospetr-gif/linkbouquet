@@ -59,8 +59,7 @@ async function handleFormSubmit(e) {
     setLoading(submitBtn, true);
 
     const greetingText = document.getElementById('greetingText').value.trim();
-    const recipientName = document.getElementById('recipientName').value.trim();
-    const youtubeLink = document.getElementById('youtubeLink').value.trim();
+        const youtubeLink = document.getElementById('youtubeLink').value.trim();
     const yandexLink = document.getElementById('yandexLink').value.trim();
     const mp3Link = document.getElementById('mp3Link').value.trim();
 
@@ -95,9 +94,6 @@ async function handleFormSubmit(e) {
     };
 
     // Добавляем recipient_name только если поле существует
-    if (recipientName) {
-        bouquetData.recipient_name = recipientName;
-    }
 
     console.log('[Admin] Sending data:', bouquetData);
 
