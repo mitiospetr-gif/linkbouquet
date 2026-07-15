@@ -1,14 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Личный кабинет — LinkBouquet</title>
+    <title>Мои букеты — LinkBouquet</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<base target="_blank">
 </head>
 <body class="dashboard-page">
     <div class="dashboard-bg">
@@ -23,8 +24,9 @@
                 <span class="logo-flower">🌸</span>
             </div>
             <nav class="dashboard-nav">
-                <a href="/" class="nav-link">Создать</a>
-                <a href="/dashboard.html" class="nav-link active">Мои букеты</a>
+                <a href="/" class="nav-link">🏠 Главная</a>
+                <a href="/admin.html" class="nav-link">✏️ Создать</a>
+                <a href="/dashboard.html" class="nav-link active">📋 Мои букеты</a>
                 <button id="logoutBtn" class="nav-link btn-logout">Выйти</button>
             </nav>
         </header>
@@ -34,8 +36,8 @@
                 <div class="profile-info">
                     <div class="profile-avatar">👤</div>
                     <div class="profile-details">
-                        <h2 id="displayName">Пользователь</h2>
-                        <p id="userEmail">email@example.com</p>
+                        <h2 id="displayName">Администратор</h2>
+                        <p id="userEmail">admin@linkbouquet.ru</p>
                     </div>
                 </div>
                 <div class="profile-stats">
@@ -51,11 +53,14 @@
             </div>
 
             <div class="bouquets-section">
-                <h3 class="section-title">Мои букеты</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem; flex-wrap:wrap; gap:0.5rem;">
+                    <h3 class="section-title" style="margin:0;">📋 Мои букеты</h3>
+                    <a href="/admin.html" class="btn-create" style="text-decoration:none;">+ Создать новый</a>
+                </div>
                 <div id="emptyState" class="empty-state" style="display: none;">
                     <span class="empty-icon">🌸</span>
                     <p>У вас пока нет букетов</p>
-                    <a href="/" class="btn-create" style="display: inline-block; margin-top: 16px;">Создать первый букет</a>
+                    <a href="/admin.html" class="btn-create" style="display: inline-block; margin-top: 16px;">Создать первый букет</a>
                 </div>
                 <div id="bouquetsList" class="bouquets-grid"></div>
             </div>
