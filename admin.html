@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Админ-панель — LinkBouquet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-bg">
+        <img src="images/bouquets/classic1.webp" alt="" class="dashboard-bg-img">
+        <div class="dashboard-bg-overlay"></div>
+    </div>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <span class="logo-text">LinkBouquet</span>
+                <span class="logo-flower">🌸</span>
+            </div>
+            <nav class="dashboard-nav">
+                <a href="/" class="nav-link">🏠 Главная</a>
+                <a href="/admin.html" class="nav-link active">✏️ Создать</a>
+                <a href="/dashboard.html" class="nav-link">📋 Мои букеты</a>
+                <button id="logoutBtn" class="nav-link btn-logout">Выйти</button>
+            </nav>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="profile-section" style="margin-bottom: 2rem;">
+                <div class="profile-info">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-details">
+                        <h2 id="displayName">Администратор</h2>
+                        <p id="userEmail">admin@linkbouquet.ru</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Создание букета -->
+            <div class="create-section" style="background: transparent; padding: 0;">
+                <h2 class="section-title" style="color: #e8edf5; margin-bottom: 1.5rem;">Создание нового букета</h2>
+
+                <div class="create-steps" style="flex-direction: column;">
+                    <div class="create-step" style="max-width: 600px; margin: 0 auto; width: 100%;">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Заполните данные открытки</h3>
+                        <form id="bouquetForm" class="bouquet-form">
+                            <div class="form-group">
+                                <label>Текст поздравления *</label>
+                                <textarea id="greetingText" placeholder="Напишите тёплые слова для получателя..." rows="4" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Имя получателя</label>
+                                <input type="text" id="recipientName" placeholder="Например: Анна, Мама, Любимая">
+                            </div>
+                            <div class="form-group">
+                                <label>YouTube ссылка</label>
+                                <input type="url" id="youtubeLink" placeholder="https://youtube.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>Ссылка на видео (Яндекс.Диск)</label>
+                                <input type="url" id="yandexLink" placeholder="https://disk.yandex.ru/...">
+                            </div>
+                            <div class="form-group">
+                                <label>Ссылка на MP3</label>
+                                <input type="url" id="mp3Link" placeholder="https://.../song.mp3">
+                            </div>
+                            <div class="form-group">
+                                <label>Выберите фон *</label>
+                                <select id="bgStyle" required>
+                                    <option value="romantic1">💗 Романтичное (розовые пионы)</option>
+                                    <option value="romantic2">💗 Романтичное (розы)</option>
+                                    <option value="classic1">✨ Классическое (розовый)</option>
+                                    <option value="classic2">✨ Классическое (белый)</option>
+                                    <option value="elegant1">🌙 Элегантное (тёмный)</option>
+                                    <option value="elegant2">🌙 Элегантное (пастель)</option>
+                                </select>
+                            </div>
+
+                            <!-- AI Generation -->
+                            <div class="form-group">
+                                <label>Или сгенерируйте фон с AI</label>
+                                <div class="ai-input-group" style="flex-direction: row; margin: 0;">
+                                    <input type="text" id="aiPrompt" placeholder="Например: нежный букет в розовых тонах..." class="ai-input" style="flex:1;">
+                                    <button type="button" class="btn-ai-generate" id="aiGenerateBtn">
+                                        <span>Сгенерировать</span>
+                                        <span class="btn-icon">✨</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Upload -->
+                            <div class="form-group">
+                                <label>Или загрузите своё фото</label>
+                                <div class="upload-area" id="uploadArea" style="margin: 0;">
+                                    <input type="file" id="bgUpload" accept="image/*" hidden>
+                                    <div class="upload-placeholder" onclick="document.getElementById('bgUpload').click()">
+                                        <span class="upload-icon">📤</span>
+                                        <span>Загрузить своё фото</span>
+                                        <small>Макс 5MB</small>
+                                    </div>
+                                </div>
+                                <div id="uploadPreview" style="display:none; margin-top: 12px;">
+                                    <img id="uploadedImage" src="" alt="Загруженное" style="max-width: 100%; border-radius: 12px; max-height: 200px; object-fit: cover;">
+                                    <button type="button" class="btn-ai-generate" id="useUploadedBtn" style="margin-top: 10px; width: 100%;">
+                                        Использовать этот фон
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Preview -->
+                            <div class="form-group">
+                                <label>Превью фона</label>
+                                <div class="step-preview" style="max-height: 150px;">
+                                    <img src="images/bouquets/romantic1.webp" alt="Превью" id="step2Preview" style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-create" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+                                🌸 Создать букет
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="create-step" style="max-width: 600px; margin: 1rem auto 0; width: 100%;">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Результат</h3>
+                        <div class="result-preview" id="resultPreview" style="display:none;">
+                            <div class="link-box">
+                                <span class="link-url" id="giftLink">linkbouquet.com/b/AbCdEfGh</span>
+                                <button class="btn-copy-link" id="copyLinkBtn">📋</button>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn-result btn-copy" id="copyBtn">Скопировать ссылку</button>
+                                <button class="btn-result btn-open" id="openBtn">Открыть ↗</button>
+                            </div>
+                            <div class="qr-section">
+                                <div id="qrContainer"></div>
+                            </div>
+                        </div>
+                        <div class="placeholder-preview" id="placeholderPreview">
+                            <p>Ссылка появится здесь после создания букета</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>LinkBouquet — музыкальные букеты с настроением 🌸</p>
+        </footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
