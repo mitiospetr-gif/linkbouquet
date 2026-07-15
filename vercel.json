@@ -4,6 +4,7 @@
     { "src": "/css/(.*)", "dest": "/css/$1" },
     { "src": "/js/(.*)", "dest": "/js/$1" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/admin.html", "dest": "/admin.html" },
     { "src": "/gift.html", "dest": "/gift.html" },
     { "src": "/login.html", "dest": "/login.html" },
     { "src": "/dashboard.html", "dest": "/dashboard.html" },
