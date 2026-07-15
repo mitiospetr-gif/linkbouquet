@@ -1,14 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Вход — LinkBouquet</title>
+    <title>Вход для автора — LinkBouquet</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<base target="_blank">
 </head>
 <body class="auth-page">
     <div class="auth-bg">
@@ -22,8 +23,11 @@
                 <span class="logo-text">LinkBouquet</span>
                 <span class="logo-flower">🌸</span>
             </div>
-            <h2 class="auth-title">Вход в личный кабинет</h2>
-            
+            <h2 class="auth-title">Вход для автора</h2>
+            <p style="text-align:center; color: #8a9bb8; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                Только администратор может создавать открытки
+            </p>
+
             <form id="emailAuthForm" class="email-auth-form">
                 <div class="form-group">
                     <label for="authEmail">Email</label>
@@ -35,9 +39,14 @@
                 </div>
                 <div class="auth-actions">
                     <button type="submit" id="signInBtn" class="btn-create">Войти</button>
-                    <button type="button" id="signUpBtn" class="btn-secondary">Регистрация</button>
                 </div>
             </form>
+
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                <p style="color: #8a9bb8; font-size: 0.85rem;">
+                    Получили ссылку на открытку? <a href="/" style="color: var(--primary);">Перейдите по ней</a>
+                </p>
+            </div>
         </div>
         <a href="/" class="back-link">← На главную</a>
     </div>
@@ -47,17 +56,18 @@
     <script src="js/utils.js"></script>
     <script src="js/auth.js"></script>
     <script>
+        // Получаем redirect URL из параметров
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectTo = urlParams.get('redirect') || '/dashboard.html';
+
         document.getElementById('emailAuthForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
             const success = await signInWithEmail(email, password);
-            if (success) window.location.href = '/dashboard.html';
-        });
-        document.getElementById('signUpBtn').addEventListener('click', async () => {
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
-            await signUpWithEmail(email, password);
+            if (success) {
+                window.location.href = redirectTo;
+            }
         });
     </script>
 </body>
