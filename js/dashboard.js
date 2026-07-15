@@ -5,19 +5,25 @@ const ADMIN_EMAIL = 'mitiospetr@gmail.com';
 document.addEventListener('DOMContentLoaded', initDashboard);
 
 async function initDashboard() {
+    console.log('[Dashboard] Page loaded, checking auth...');
+
     const user = await getCurrentUser();
+    console.log('[Dashboard] User:', user ? user.email : 'none');
+
     if (!user) {
+        console.log('[Dashboard] No user, redirecting...');
         window.location.href = '/login.html?redirect=/dashboard.html';
         return;
     }
 
-    // Проверяем админа
     if (user.email !== ADMIN_EMAIL) {
+        console.log('[Dashboard] Access denied for:', user.email);
         showToast('Доступ запрещён', 'error');
         setTimeout(() => window.location.href = '/', 2000);
         return;
     }
 
+    console.log('[Dashboard] Access granted');
     await loadProfile(user);
     await loadBouquets(user.id);
 
@@ -42,11 +48,15 @@ async function loadBouquets(userId) {
     if (!container) return;
 
     try {
+        console.log('[Dashboard] Loading bouquets for user:', userId);
+
         const { data: bouquets, error } = await supabaseClient
             .from('bouquets')
             .select('*')
             .eq('created_by', userId)
             .order('created_at', { ascending: false });
+
+        console.log('[Dashboard] Bouquets loaded:', bouquets ? bouquets.length : 0, 'Error:', error);
 
         if (error) throw error;
 
@@ -66,7 +76,6 @@ async function loadBouquets(userId) {
 
         container.innerHTML = bouquets.map(b => createCard(b)).join('');
 
-        // Обработчики
         container.querySelectorAll('.btn-copy-link').forEach(btn => {
             btn.addEventListener('click', e => copyToClipboard(e.currentTarget.dataset.url));
         });
@@ -92,7 +101,7 @@ async function loadBouquets(userId) {
         });
 
     } catch (err) {
-        console.error('Error:', err);
+        console.error('[Dashboard] Error:', err);
         showToast('Ошибка загрузки букетов', 'error');
     }
 }

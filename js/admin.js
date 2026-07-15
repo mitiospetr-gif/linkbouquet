@@ -1,6 +1,6 @@
 // ===== АДМИН-ПАНЕЛЬ: СОЗДАНИЕ БУКЕТОВ =====
 
-const ADMIN_EMAIL = 'mitiospetr@gmail.com'; // Замените на ваш email
+const ADMIN_EMAIL = 'mitiospetr@gmail.com';
 
 const form = document.getElementById('bouquetForm');
 const resultPreview = document.getElementById('resultPreview');
@@ -15,14 +15,19 @@ const step2Preview = document.getElementById('step2Preview');
 
 // Проверка авторизации и прав админа
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log('[Admin] Page loaded, checking auth...');
+
     const user = await getCurrentUser();
+    console.log('[Admin] User:', user ? user.email : 'none');
+
     if (!user) {
+        console.log('[Admin] No user, redirecting to login...');
         window.location.href = '/login.html?redirect=/admin.html';
         return;
     }
 
-    // Проверяем, что это админ
     if (user.email !== ADMIN_EMAIL) {
+        console.log('[Admin] Access denied for:', user.email);
         showToast('Доступ запрещён. Только администратор может создавать букеты.', 'error');
         setTimeout(() => {
             window.location.href = '/';
@@ -30,13 +35,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // Обновляем профиль
+    console.log('[Admin] Access granted for admin:', user.email);
+
     const displayNameEl = document.getElementById('displayName');
     const userEmailEl = document.getElementById('userEmail');
     if (displayNameEl) displayNameEl.textContent = 'Администратор';
     if (userEmailEl) userEmailEl.textContent = user.email;
 
-    // Logout
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.addEventListener('click', signOut);
 });
@@ -56,6 +61,7 @@ if (bgStyle) {
 
 if (form) {
     form.addEventListener('submit', handleFormSubmit);
+    console.log('[Admin] Form submit listener attached');
 }
 
 if (copyBtn) {
@@ -72,8 +78,11 @@ if (openBtn) {
 
 async function handleFormSubmit(e) {
     e.preventDefault();
+    console.log('[Admin] Form submitted');
 
     const user = await getCurrentUser();
+    console.log('[Admin] Current user:', user ? user.email : 'none');
+
     if (!user || user.email !== ADMIN_EMAIL) {
         showToast('Доступ запрещён', 'error');
         return;
@@ -87,6 +96,8 @@ async function handleFormSubmit(e) {
     const youtubeLink = document.getElementById('youtubeLink').value.trim();
     const yandexLink = document.getElementById('yandexLink').value.trim();
     const mp3Link = document.getElementById('mp3Link').value.trim();
+
+    console.log('[Admin] Form data:', { greetingText, recipientName, youtubeLink, yandexLink, mp3Link });
 
     if (!greetingText) {
         showToast('Введите текст поздравления', 'error');
@@ -123,6 +134,8 @@ async function handleFormSubmit(e) {
         is_public: true
     };
 
+    console.log('[Admin] Inserting data:', bouquetData);
+
     try {
         const { data, error } = await supabaseClient
             .from('bouquets')
@@ -130,9 +143,19 @@ async function handleFormSubmit(e) {
             .select()
             .single();
 
-        if (error) throw error;
+        console.log('[Admin] Insert result:', { data, error });
+
+        if (error) {
+            console.error('[Admin] Insert error:', error);
+            throw error;
+        }
+
+        if (!data || !data.short_id) {
+            throw new Error('No data returned from insert');
+        }
 
         const url = `${window.location.origin}/gift.html?id=${data.short_id}`;
+        console.log('[Admin] Generated URL:', url);
 
         giftLink.textContent = url;
         placeholderPreview.style.display = 'none';
@@ -143,13 +166,11 @@ async function handleFormSubmit(e) {
         }
 
         showToast('Букет создан! 🌸 Отправьте ссылку получателю.');
-
-        // Сбрасываем форму
         form.reset();
 
     } catch (err) {
-        console.error('Error:', err);
-        showToast('Ошибка: ' + err.message, 'error');
+        console.error('[Admin] Error:', err);
+        showToast('Ошибка: ' + (err.message || 'Неизвестная ошибка'), 'error');
     } finally {
         setLoading(submitBtn, false);
     }
