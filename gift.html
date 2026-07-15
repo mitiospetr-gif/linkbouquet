@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Ваш персональный букет</title>
+    <title>Ваш персональный букет — LinkBouquet</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,12 +19,12 @@
     <div class="gift-container">
         <div class="gift-card">
             <div class="gift-flower-icon">🌸</div>
-            <h1 class="gift-title">Для тебя!</h1>
-            
+            <h1 class="gift-title" id="giftTitle">Для тебя!</h1>
+
             <p id="greetingText" class="gift-text"></p>
-            
+
             <div class="gift-links" id="linksContainer">
-                <a id="youtubeBtn" href="#" target="_blank" class="gift-link youtube">
+                <a id="youtubeBtn" href="#" target="_blank" class="gift-link youtube" style="display:none;">
                     <span class="gift-link-icon">▶️</span>
                     <div class="gift-link-info">
                         <span class="gift-link-title">Смотреть на YouTube</span>
@@ -32,7 +32,7 @@
                     </div>
                     <span class="gift-link-arrow">›</span>
                 </a>
-                <a id="yandexBtn" href="#" target="_blank" class="gift-link yandex">
+                <a id="yandexBtn" href="#" target="_blank" class="gift-link yandex" style="display:none;">
                     <span class="gift-link-icon">💿</span>
                     <div class="gift-link-info">
                         <span class="gift-link-title">Видео на Яндекс Диск</span>
@@ -40,7 +40,7 @@
                     </div>
                     <span class="gift-link-arrow">›</span>
                 </a>
-                <a id="mp3Btn" href="#" target="_blank" class="gift-link mp3">
+                <a id="mp3Btn" href="#" target="_blank" class="gift-link mp3" style="display:none;">
                     <span class="gift-link-icon">🎵</span>
                     <div class="gift-link-info">
                         <span class="gift-link-title">Скачать MP3</span>
@@ -49,12 +49,15 @@
                     <span class="gift-link-arrow">›</span>
                 </a>
             </div>
-            
+
             <p id="authorText" class="gift-author"></p>
             <p class="gift-footer-text">С любовью <span class="heart">💗</span></p>
         </div>
-        
-        <a href="/" class="create-own-link">Создать свой букет →</a>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; margin-top: 1rem;">
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Эта открытка создана специально для вас</p>
+            <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem;">🔗 LinkBouquet — музыкальные букеты</p>
+        </div>
     </div>
 
     <script src="js/config.js"></script>
